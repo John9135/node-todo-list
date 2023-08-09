@@ -29,11 +29,11 @@ const controllerTodo = {
             return res.status(500).json({ msg: error })
         }
     },
-    updateAuthor: async (req, res) => {
+    updateTodo: async (req, res) => {
         try {
             const { id } = req.params
             const activity = req.body.activity
-            await Author.findByIdAndUpdate(id, {
+            await Todo.findByIdAndUpdate(id, {
                 activity: activity
             })
             res.json({ msg: 'update' })

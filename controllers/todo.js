@@ -3,30 +3,28 @@ const Todo = require('../models/todo')
 const controllerTodo = {
     create: async (req, res) => {
         try {
-            const activity = req.body.first_name
-            const family_name = req.body.family_name
-            await Author.create({
-                first_name: first_name,
-                family_name: family_name
+            const activity = req.body.activity
+            await Todo.create({
+                activity: activity
             }).then(console.log('author created'))
             res.json({ msg: 'created' })
         } catch (error) {
             return res.status(500).json({ msg: error })
         }
     },
-    getAuthors: async (req, res) => {
+    getTodo: async (req, res) => {
         try {
-            const authors = await Author.find({})
-            res.json(authors)
+            const activities = await Todo.find({})
+            res.json(activities)
         } catch (error) {
             return res.status(500).json({ msg: error })
         }
     },
-    getAuthorsById: async (req, res) => {
+    getTodoById: async (req, res) => {
         try {
             const { id } = req.params
-            const author = await Author.findById(id)
-            res.json(author)
+            const todo = await Todo.findById(id)
+            res.json(todo)
         } catch (error) {
             return res.status(500).json({ msg: error })
         }
@@ -34,25 +32,23 @@ const controllerTodo = {
     updateAuthor: async (req, res) => {
         try {
             const { id } = req.params
-            const first_name = req.body.first_name
-            const family_name = req.body.family_name
+            const activity = req.body.activity
             await Author.findByIdAndUpdate(id, {
-                first_name: first_name,
-                family_name: family_name
+                activity: activity
             })
             res.json({ msg: 'update' })
         } catch (error) {
             return res.status(500).json({ msg: error })
         }
     },
-    deleteAuthor: async (req, res) => {
+    deleteTodo: async (req, res) => {
         try {
             const { id } = req.params
-            await Author.findByIdAndDelete(id)
+            await Todo.findByIdAndDelete(id)
             res.json({ msg: 'Delete' })
         } catch (error) {
             return res.status(500).json({ msg: error })
         }
     }
 }
-module.exports = controllerAuthor
+module.exports = controllerTodo
